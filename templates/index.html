@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Upload Image</title>
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        color: #28a745;
+      }
+      form {
+        margin-top: 20px;
+      }
+      .file-input {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .file-input:hover {
+        background-color: #218838;
+      }
+      .file-input input[type="file"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+      input[type="submit"] {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #218838;
+      }
+      .images {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .image-container {
+        text-align: center;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Upload Image</h1>
+      <form method="post" enctype="multipart/form-data" action="/upload">
+        <label class="file-input">
+          Choose File
+          <input type="file" name="file" required>
+        </label>
+        <br><br>
+        <input type="submit" value="Upload">
+      </form>
+      {% if filename %}
+      <div class="images">
+        <div class="image-container">
+          <h2>Uploaded Image:</h2>
+          <img style="width:256px; height: 256px;" src="{{ url_for('display_file', filename=filename) }}" alt="Uploaded Image">
+        </div>
+        <div class="image-container">
+          <h2>Processed Image:</h2>
+          <img src="{{ url_for('display_file', filename=processed_filename) }}" alt="Processed Image">
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
